@@ -1,6 +1,6 @@
 """Unit tests for OpenCVTools class."""
 
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 import numpy as np
 import pytest
@@ -64,7 +64,7 @@ def mock_video_tempfile(tmp_path):
         temp_path.touch()
         temp_file = Mock()
         temp_file.name = str(temp_path)
-        context = Mock()
+        context = MagicMock()
         context.__enter__.return_value = temp_file
         return context
 
