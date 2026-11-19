@@ -447,7 +447,11 @@ class TestVideoCapture:
         """Test video capture when frame reading fails."""
         mock_cv2.VideoCapture.return_value.read.return_value = (False, None)
 
-        with patch("tempfile.NamedTemporaryFile"), patch("agno.tools.opencv.getattr") as mock_getattr:
+        with (
+            patch("tempfile.NamedTemporaryFile"),
+            patch("os.unlink"),
+            patch("agno.tools.opencv.getattr") as mock_getattr,
+        ):
             mock_getattr.return_value.return_value = 123456
             result = opencv_tools_no_preview.capture_video(mock_agent, duration=1)
 
